@@ -2,7 +2,7 @@ package angelolaera.gestione_eventi_finale.service;
 
 
 import angelolaera.gestione_eventi_finale.entities.Utente;
-import angelolaera.gestione_eventi_finale.exception.UtenteNotFoundException;
+import angelolaera.gestione_eventi_finale.exception.NotFoundException;
 import angelolaera.gestione_eventi_finale.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class UtenteService {
     }
 
     public Utente trovaPerId(Long id) {
-        return utenteRepository.findById(id).orElseThrow(() -> new UtenteNotFoundException("Utente non trovato con ID: " + id));
+        return utenteRepository.findById(id).orElseThrow(() -> new NotFoundException("Utente non trovato con ID: " + id));
     }
 
     public Utente salvaUtente(Utente utente) {

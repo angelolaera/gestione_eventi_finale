@@ -3,15 +3,12 @@ package angelolaera.gestione_eventi_finale.service;
 import angelolaera.gestione_eventi_finale.entities.Evento;
 import angelolaera.gestione_eventi_finale.entities.Prenotazione;
 import angelolaera.gestione_eventi_finale.entities.Utente;
-import angelolaera.gestione_eventi_finale.exception.EventoNotFoundException;
-import angelolaera.gestione_eventi_finale.exception.PrenotazioneNotFoundException;
-import angelolaera.gestione_eventi_finale.exception.UtenteNotFoundException;
+import angelolaera.gestione_eventi_finale.exception.NotFoundException;
 import angelolaera.gestione_eventi_finale.repository.EventoRepository;
 import angelolaera.gestione_eventi_finale.repository.PrenotazioneRepository;
 import angelolaera.gestione_eventi_finale.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 
@@ -32,12 +29,12 @@ public class PrenotazioneService {
     }
 
     public Prenotazione trovaPerId(Long id) {
-        return prenotazioneRepository.findById(id).orElseThrow(() -> new PrenotazioneNotFoundException("Prenotazione non trovata con ID: " + id));
+        return prenotazioneRepository.findById(id).orElseThrow(() -> new NotFoundException("Prenotazione non trovata con ID: " + id));
     }
 
     public Prenotazione creaPrenotazione(Long utenteId, Long eventoId, int numeroPosti) {
-        Utente utente = utenteRepository.findById(utenteId).orElseThrow(UtenteNotFoundException::new);
-        Evento evento = eventoRepository.findById(eventoId).orElseThrow(EventoNotFoundException::new);
+        Utente utente = utenteRepository.findById(utenteId).orElseThrow();
+        Evento evento = eventoRepository.findById(eventoId).orElseThrow();
 
         evento.setPostiDisponibili(evento.getPostiDisponibili() - numeroPosti);
         eventoRepository.save(evento);
@@ -62,4 +59,5 @@ public class PrenotazioneService {
         Prenotazione prenotazione = trovaPerId(id);
         prenotazioneRepository.delete(prenotazione);
     }
+
 }

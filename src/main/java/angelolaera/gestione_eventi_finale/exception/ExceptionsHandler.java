@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionsHandler {
-    
-    /*@ExceptionHandler(UnauthorizedException.class)
+
+    @ExceptionHandler(UnauthorizedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ErrorsPayload handleUnauthorizedException(UnauthorizedException ex) {
         return new ErrorsPayload(ex.getMessage());
-    }*/
+    }
 
     @ExceptionHandler(ChangeSetPersister.NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

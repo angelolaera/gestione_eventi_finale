@@ -1,7 +1,7 @@
 package angelolaera.gestione_eventi_finale.service;
 
 import angelolaera.gestione_eventi_finale.entities.Evento;
-import angelolaera.gestione_eventi_finale.exception.EventoNotFoundException;
+import angelolaera.gestione_eventi_finale.exception.NotFoundException;
 import angelolaera.gestione_eventi_finale.repository.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class EventoService {
     }
 
     public Evento trovaPerId(Long id) {
-        return eventoRepository.findById(id).orElseThrow(() -> new EventoNotFoundException("Evento non trovato con ID: " + id));
+        return eventoRepository.findById(id).orElseThrow(() -> new NotFoundException("Evento non trovato con ID: " + id));
     }
 
     public Evento salvaEvento(Evento evento) {

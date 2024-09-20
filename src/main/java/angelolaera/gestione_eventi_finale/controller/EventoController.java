@@ -18,7 +18,7 @@ public class EventoController {
     // 1. GET http://localhost:3001/eventi
     @GetMapping
     private List<Evento> getAllEventi() {
-        return eventoService.getTuttiEventi();
+        return eventoService.trovaTutti();
     }
 
     // 2. GET http://localhost:3001/eventi/{id}
@@ -31,19 +31,19 @@ public class EventoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private Evento createEvento(@RequestBody Evento body) {
-        return eventoService.creaEvento(body);
+        return eventoService.salvaEvento(body);
     }
 
     // 4. PUT http://localhost:3001/eventi/{id} (+body)
     @PutMapping("/{id}")
     private Evento findEventoByIdAndUpdate(@PathVariable Long id, @RequestBody Evento body) {
-        return eventoService.modificaEvento(id, body);
+        return eventoService.trovaPerIdEAggiorna(id, body);
     }
 
     // 5. DELETE http://localhost:3001/eventi/{id}
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void deleteEvento(@PathVariable Long id) {
-        eventoService.eliminaEvento(id);
+        eventoService.trovaPerIdECancella(id);
     }
 }
